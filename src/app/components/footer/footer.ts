@@ -1,0 +1,12 @@
+import { Component } from '@angular/core';
+import { Navbar } from '../navbar/navbar';
+
+@Component({
+  imports: [],
+  selector: 'app-footer',
+  styleUrl: './footer.css',
+  templateUrl: './footer.html'
+})
+export class Footer {
+  currentYear = new Date().getFullYear();
+}

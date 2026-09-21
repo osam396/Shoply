@@ -1,0 +1,13 @@
+@if (product) {
+  <div class="card p-4">
+    <img [src]="product.imageUrl" [alt]="product.name" class="mb-3" style="max-width: 300px" />
+    <h4>{{ product.name }}</h4>
+    <p class="text-secondary">{{ product.material }}</p>
+    <p class="fw-bold fs-5">{{ product.price | currency: 'EGP' }}</p>
+    <p class="text-secondary small">
+      Purchased on: {{ product.purchaseDate | date: 'mediumDate' }}
+    </p>
+  </div>
+} @else {
+  <p class="text-secondary">Product not found.</p>
+}

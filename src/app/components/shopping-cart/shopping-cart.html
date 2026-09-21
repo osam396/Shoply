@@ -1,0 +1,43 @@
+<div class="container py-4">
+  <h4 class="fw-bold mb-3">Shopping Cart</h4>
+
+  @if (cartService.cart.length > 0) {
+    <table class="table table-bordered align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Qty</th>
+          <th>Subtotal</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of cartService.cart; track item.product.id) {
+          <tr>
+            <td>{{ $index + 1 }}</td>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.product.price | currency: 'EGP' }}</td>
+            <td>{{ item.qty }}</td>
+            <td>{{ item.product.price * item.qty | currency: 'EGP' }}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary" (click)="goToDetails(item.product.id)">
+                Details
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4" class="text-end fw-bold">Total:</td>
+          <td class="fw-bold">{{ cartService.cartTotal | currency: 'EGP' }}</td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+  } @else {
+    <p class="text-secondary">Cart is empty.</p>
+  }
+</div>

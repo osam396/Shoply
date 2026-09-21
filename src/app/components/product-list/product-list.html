@@ -1,0 +1,41 @@
+<div class="row g-4">
+  @for (product of products; track product.id) {
+    <div class="col-6 col-md-4 col-lg-3">
+      <div
+        class="card h-100 border-0"
+        [appProductCard]="product"
+        (click)="goToDetails(product.id)"
+        style="cursor: pointer"
+      >
+        <img [src]="product.imageUrl" [alt]="product.name" class="card-img-top" />
+
+        <div class="card-body d-flex flex-column">
+          <h6 class="card-title mb-1">{{ product.name }}</h6>
+          <p class="text-secondary small mb-1">{{ product.material }}</p>
+          <p class="text-secondary small mb-2">
+            Purchased on: {{ product.purchaseDate | date: 'mediumDate' }}
+          </p>
+
+          <div class="mt-auto">
+            <div class="mb-1">
+              <span class="fw-bold fs-5">{{ product.price | currency: 'EGP' }}</span>
+            </div>
+            <div class="mb-2 text-secondary small">
+              Total ({{ product.quantity }} pcs): {{ getTotalPrice(product) | currency: 'EGP' }}
+            </div>
+            <button
+              class="btn btn-primary w-100 mt-2"
+              [disabled]="product.quantity === 0"
+              (click)="addToCart(product); $event.stopPropagation()"
+            >
+              <i class="bi bi-cart-plus me-1"></i>
+              {{ product.quantity === 0 ? 'Out of Stock' : 'Add to Cart' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  } @empty {
+    <p class="text-secondary">No products match this price.</p>
+  }
+</div>
